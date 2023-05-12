@@ -1,0 +1,9 @@
+node_modules/
+dist/
+
+.idea
+
+npm-debug.log*
+*.tsbuildinfo
+.npm
+.eslintcache

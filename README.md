@@ -1,2 +1,3 @@
-# node-template-generator
-Template generator for 'npx @restatedev/create-project' and 'npm create @restatedev/project'
+# TypeScript / NodeJS App Template Generator for Restate
+
+Allows you to call `npx @restatedev/create-app` or `npm create @restatedev/app`.

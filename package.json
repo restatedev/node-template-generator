@@ -1,0 +1,43 @@
+{
+  "name": "@restatedev/create-app",
+  "version": "0.0.1",
+  "description": "Project template generator for the Restate TypeScript SDK",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/restatedev/node-template-generator.git"
+  },
+  "release-it": {
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    }
+  },
+  "publishConfig": {
+    "@restatedev:registry": "https://npm.pkg.github.com"
+  },
+  "author": "Restate Developers",
+  "license": "MIT",
+  "email": "code@restate.dev",
+  "type": "commonjs",
+  "bin": {
+    "@restatedev/create-app": "./bin/main.js"
+  },
+  "scripts": {
+    "lint": "eslint --ignore-path .eslintignore --ext=.js .",
+    "format": "prettier --ignore-path .eslintignore --write \"**/*.js\"",
+    "release": "release-it"
+  },
+  "files": [
+    "bin",
+    "data"
+  ],
+  "dependencies": {
+    "unzipper": "0.10.14"
+  },
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "prettier": "^2.8.8"
+  }
+}
