@@ -1,0 +1,25 @@
+{
+  "name": "restate-ts-template",
+  "version": "0.0.1",
+  "description": "Template for JavaScript/TypeScript services running with Restate (https://github.com/restatedev/) ",
+  "main": "app.js",
+  "type": "commonjs",
+  "scripts": {
+    "proto": "cd proto && npx buf mod update && npx buf generate .",
+    "build": "tsc --noEmitOnError",
+    "app": "node ./dist/app.js",
+    "app-dev": "ts-node-dev --watch ./src --respawn --transpile-only ./src/app.ts"
+  },
+  "author": "<your name here>",
+  "license": "ISC",
+  "dependencies": {
+    "@restatedev/restate-sdk": "^1.0.17",
+    "protobufjs": "^7.2.2",
+    "ts-proto": "^1.140.0"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^5.0.2",
+    "@bufbuild/buf": "1.15.0"
+  }
+}
