@@ -21,12 +21,18 @@
   "license": "MIT",
   "email": "code@restate.dev",
   "type": "commonjs",
+  "engines": {
+    "node": ">= 10"
+  },
   "bin": {
     "@restatedev/create-app": "./bin/main.js"
   },
   "scripts": {
     "lint": "eslint --ignore-path .eslintignore --ext=.js .",
     "format": "prettier --ignore-path .eslintignore --write \"**/*.+(js|ts|json)\"",
+    "build": "node ./scripts/build_archive.js",
+    "build-template": "cd template && npm install && npm run proto && npm run build",
+    "clean-template": "rm -rf template/dist template/src/generated template/node_modules template/proto/buf.lock template/package-lock.json",
     "release": "release-it"
   },
   "files": [
@@ -38,6 +44,7 @@
   },
   "devDependencies": {
     "eslint": "^8.39.0",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "archiver": "^5.3.1"
   }
 }

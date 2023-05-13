@@ -15,8 +15,12 @@ jobs:
         with:
           node-version: "16.x"
           registry-url: "https://npm.pkg.github.com"
+      # in the build sequence, we build the archive before running the test build on
+      # the template, to avoid accidentally packaging build artifacts 
       - run: npm ci
       - run: npm run lint
+      - run: npm run build
+      - run: npm run build-template
       - run: npm publish
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}

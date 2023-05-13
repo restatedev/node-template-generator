@@ -1,5 +1,6 @@
-# dependencies in generator project
+# dependencies and build artifacts in generator project
 node_modules
+data/node-template.zip
 
 # dependencies and build artifacts in template 
 template/node_modules
