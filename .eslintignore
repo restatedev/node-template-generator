@@ -1,3 +1,7 @@
 node_modules
 data
-
+package-lock.json
+template/node_modules
+template/dist
+template/src/generated
+template/tsconfig.json

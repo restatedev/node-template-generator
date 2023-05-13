@@ -26,7 +26,7 @@
   },
   "scripts": {
     "lint": "eslint --ignore-path .eslintignore --ext=.js .",
-    "format": "prettier --ignore-path .eslintignore --write \"**/*.js\"",
+    "format": "prettier --ignore-path .eslintignore --write \"**/*.+(js|ts|json)\"",
     "release": "release-it"
   },
   "files": [

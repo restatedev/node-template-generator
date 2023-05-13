@@ -1,8 +1,17 @@
-node_modules/
-dist/
+# dependencies in generator project
+node_modules
 
+# dependencies and build artifacts in template 
+template/node_modules
+template/dist
+template/src/generated
+template/package-lock.json
+template/proto/buf.lock
+
+# IDE files
 .idea
 
+# build tool artifacts
 npm-debug.log*
 *.tsbuildinfo
 .npm
