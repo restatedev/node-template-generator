@@ -15,12 +15,14 @@ jobs:
         with:
           node-version: "16.x"
           registry-url: "https://npm.pkg.github.com"
-      # in the build sequence, we build the archive before running the test build on
-      # the template, to avoid accidentally packaging build artifacts 
       - run: npm ci
       - run: npm run lint
+      # we build the archive before running the template test build, to avoid packaging build artifacts
       - run: npm run build
+      # when verifying the template, we need access to the private Restate TypeScript/Node SDK package
       - run: npm run build-template
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGE_READ_ACCESS }}
       - run: npm publish
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}

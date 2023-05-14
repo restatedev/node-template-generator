@@ -8,6 +8,7 @@ template/dist
 template/src/generated
 template/package-lock.json
 template/proto/buf.lock
+template/.npmrc
 
 # IDE files
 .idea
