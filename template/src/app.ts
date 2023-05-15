@@ -14,7 +14,7 @@ export class MyExampleService implements ExampleService {
   async sampleCall(request: SampleRequest): Promise<SampleResponse> {
     // The Restate context is the entry point of all interaction with Restate, such as
     // - RPCs:         `await (new AnotherServiceClientImpl(ctx)).myMethod(...)`
-    // - messagig:     `await ctx.inBackground(() => { (new AnotherServiceClientImpl).myMethod(...) } )`
+    // - messagig:     `await ctx.inBackground(() => { (new AnotherServiceClientImpl(ctx)).myMethod(...) } )`
     // - state:        `await ctx.get<string>("myState")`
     // - side-effects: `ctx.sideEffect(() => { runExternalStuff() })`
     // - etc.
