@@ -114,12 +114,6 @@ When you are extending or adapting the service interface, adapt the method and r
 
 That's it! We managed to run a Restate service and invoke it!
 
-## Using development mode (autoregister on changes)
-
-Use `npm run app-dev` to start the application via `ts-node-dev` and reload automatically when files change. 
-
-For more information on the development mode, have a look at its GitHub repository: https://github.com/restatedev/node-dev-mode.
-
 ## Useful links 
 - Restate Typescript SDK: https://github.com/restatedev/sdk-typescript
 - Restate Docker container: https://github.com/restatedev/restate-dist
