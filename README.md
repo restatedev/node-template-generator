@@ -8,7 +8,7 @@ Restate is a system for easily building resilient applications using **distribut
 
 # tl;dr
 
-To setup up the template service, use this sequence of commands:
+To set up the template service, use this sequence of commands:
 
 > &#x1F4DD; Make sure you have set up your [access to Restate's packages](https://github.com/restatedev/restate-dist)
 
