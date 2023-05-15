@@ -18,7 +18,8 @@ cd restate-node-template
 npm install
 npm run proto
 npm run build
-```
+
+npm run app
 
 # Step by step
 
