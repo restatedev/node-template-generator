@@ -24,11 +24,11 @@ and the [TypeScript SDK Readme](https://github.com/restatedev/sdk-typescript/blo
 ## Usage
 
 ### Setup
-Clone the repository.
+Run the template generator:
 
 ```shell
-git clone git@github.com:restatedev/node-template.git
-cd node-template
+npx -y @restatedev/create-app
+cd restate-node-template
 ```
 
 First, get all dependencies and build tools:
