@@ -50,7 +50,7 @@ npx -y @restatedev/create-app
 cd restate-node-template
 ```
 
-Next, install Restate's nodejs dependecies:
+Next, install Restate's nodejs dependencies:
 ```shell
 npm install
 ```
