@@ -84,7 +84,7 @@ Have a look at how to start up the runtime in a Docker container in this reposit
 
 - For MacOS:
 ```shell
-docker run ghcr.io/restatedev/restate-dist:latest
+docker run -p 8081:8081 -p 9090:9090 -p 9091:9091 ghcr.io/restatedev/restate-dist:latest
 ```
 - For Linux:
 ```shell
