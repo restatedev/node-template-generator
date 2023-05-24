@@ -28,7 +28,7 @@ npm run app
 The templated project uses the [Restate TypeScript SDK](https://github.com/restatedev/sdk-typescript)
 and sets up dependencies, protobuf compilation, and other useful scripts.
 
-This template also contains a minimal runnable example of a Restate service. First, run the example to get an idea of how things tie together. Then, adapt the example and develop your own services. 
+This template also contains a minimal runnable example of a Restate service. First, run the example to get an idea of how things tie together. Then, adapt the example and develop your own services.
 
 The basic steps of developing a Restate service are shown below. For a comprehensive guide, please refer to the [Restate Docs](https://github.com/restatedev/documentation)
 and the [TypeScript SDK Readme](https://github.com/restatedev/sdk-typescript/blob/main/README.md).
@@ -78,20 +78,20 @@ Your Restate service is now up and running!
 
 ## Launch the Restate Runtime and call the Service
 
-### Launch the Restate runtime 
+### Launch the Restate runtime
 
 Have a look at how to start up the runtime in a Docker container in this repository: https://github.com/restatedev/restate-dist or simply run the following commands:
 
 - For MacOS:
 ```shell
-docker run -e RUST_LOG=info,restate=debug ghcr.io/restatedev/restate-dist:latest
+docker run ghcr.io/restatedev/restate-dist:latest
 ```
 - For Linux:
 ```shell
-docker run -e RUST_LOG=info,restate=debug --network=host ghcr.io/restatedev/restate-dist:latest
+docker run --network=host ghcr.io/restatedev/restate-dist:latest
 ```
 
-### Connect Services and Runtime 
+### Connect Services and Runtime
 
 Once the runtime is up, let it discover your services by executing:
 
@@ -112,12 +112,12 @@ We can now invoke the `SampleCall` method by executing:
 curl -X POST http://localhost:9090/org.example.ExampleService/SampleCall -H 'content-type: application/json' -d '{"request": "Pete"}'
 ```
 
-You can see that we include the JSON encoded request body. 
+You can see that we include the JSON encoded request body.
 When you are extending or adapting the service interface, adapt the method and request body accordingly.
 
 That's it! We managed to run a Restate service and invoke it!
 
-# Useful links 
+# Useful links
 - Restate Typescript SDK: https://github.com/restatedev/sdk-typescript
 - Restate Docker container: https://github.com/restatedev/restate-dist
 - The Restate documentation: https://github.com/restatedev/documentation
@@ -132,4 +132,3 @@ that folder.
 
 Please take care to not commit unnecessary build artifacts when extending the template
 (and adjust `.gitignore` accordingly).
-
