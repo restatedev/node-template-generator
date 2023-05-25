@@ -75,6 +75,15 @@ npm run app
 ```
 Your Restate service is now up and running!
 
+### Run the service on AWS Lambda
+To run the service as an AWS Lambda function, we need to upload it as a zip file on AWS.
+Create the zip file with:
+```shell
+npm run bundle
+```
+Make sure you create a Restate Lambda handler called `handler` in `src/app.ts`, instead of a Restate server. 
+
+Read the [Restate documentation](https://github.com/restatedev/documentation) for the details on AWS Lambda deployment.
 
 ## Launch the Restate Runtime and call the Service
 
