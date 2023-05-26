@@ -137,6 +137,7 @@ Please take care to not commit unnecessary build artifacts when extending the te
 ### Upgrading Typescript SDK 
 - Upgrade the version tag in `template/package.json`.
 - Run the app to check if everything works
+- Test the template build with `npm run build-template`
 - Release the new template generator via `npm run release`
 
 ### Upgrading Restate runtime
