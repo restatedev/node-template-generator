@@ -132,3 +132,12 @@ that folder.
 
 Please take care to not commit unnecessary build artifacts when extending the template
 (and adjust `.gitignore` accordingly).
+
+## Releasing
+### Upgrading Typescript SDK 
+- Upgrade the version tag in `template/package.json`.
+- Run the app to check if everything works
+- Release the new template generator via `npm run release`
+
+### Upgrading Restate runtime
+Upgrade the version tag of the Restate runtime container image in this readme.
