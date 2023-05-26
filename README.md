@@ -84,11 +84,11 @@ Have a look at how to start up the runtime in a Docker container in this reposit
 
 - For MacOS:
 ```shell
-docker run -p 8081:8081 -p 9090:9090 -p 9091:9091 ghcr.io/restatedev/restate-dist:latest
+docker run --name restate_dev --rm -p 8081:8081 -p 9091:9091 -p 9090:9090 ghcr.io/restatedev/restate-dist:0.1.1
 ```
 - For Linux:
 ```shell
-docker run --network=host ghcr.io/restatedev/restate-dist:latest
+docker run --name restate_dev --rm --network=host ghcr.io/restatedev/restate-dist:0.1.1
 ```
 
 ### Connect Services and Runtime
@@ -132,3 +132,13 @@ that folder.
 
 Please take care to not commit unnecessary build artifacts when extending the template
 (and adjust `.gitignore` accordingly).
+
+## Releasing
+### Upgrading Typescript SDK 
+- Upgrade the version tag in `template/package.json`.
+- Run the app to check if everything works
+- Test the template build with `npm run build-template`
+- Release the new template generator via `npm run release`
+
+### Upgrading Restate runtime
+Upgrade the version tag of the Restate runtime container image in this readme.
