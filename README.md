@@ -93,18 +93,18 @@ Have a look at how to start up the runtime in a Docker container in this reposit
 
 - For MacOS:
 ```shell
-docker run --name restate_dev --rm -p 8081:8081 -p 9091:9091 -p 9090:9090 ghcr.io/restatedev/restate-dist:0.1.3
+docker run --name restate_dev --rm -p 8081:8081 -p 9091:9091 -p 9090:9090 ghcr.io/restatedev/restate-dist:0.1.4
 ```
 - For Linux:
 ```shell
-docker run --name restate_dev --rm --network=host ghcr.io/restatedev/restate-dist:0.1.3
+docker run --name restate_dev --rm --network=host ghcr.io/restatedev/restate-dist:0.1.4
 ```
 
 ### Connect Services and Runtime
 
 Once the runtime is up, let it discover your services by executing:
 
-- For MacOS:
+- For macOS:
 ```shell
 curl -X POST http://localhost:8081/services/discover -H 'content-type: application/json' -d '{"uri": "http://host.docker.internal:8080"}'
 ```

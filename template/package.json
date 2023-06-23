@@ -14,7 +14,7 @@
     "app-dev": "ts-node-dev --watch ./src --respawn --transpile-only ./src/app.ts"
   },
   "dependencies": {
-    "@restatedev/restate-sdk": "1.0.27",
+    "@restatedev/restate-sdk": "1.0.30",
     "protobufjs": "^7.2.2",
     "ts-proto": "^1.140.0"
   },
