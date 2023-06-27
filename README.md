@@ -81,7 +81,7 @@ Create the zip file with:
 ```shell
 npm run bundle
 ```
-Make sure you create a Restate Lambda handler called `handler` in `src/app.ts`, instead of a Restate server. 
+Make sure you create a Restate Lambda handler called `handler` in `src/app.ts`, instead of a Restate server.
 
 Read the [Restate documentation](https://github.com/restatedev/documentation) for the details on AWS Lambda deployment.
 
@@ -93,11 +93,11 @@ Have a look at how to start up the runtime in a Docker container in this reposit
 
 - For MacOS:
 ```shell
-docker run --name restate_dev --rm -p 8081:8081 -p 9091:9091 -p 9090:9090 ghcr.io/restatedev/restate-dist:0.1.4
+docker run --name restate_dev --rm -p 8081:8081 -p 9091:9091 -p 9090:9090 ghcr.io/restatedev/restate-dist:0.1.5
 ```
 - For Linux:
 ```shell
-docker run --name restate_dev --rm --network=host ghcr.io/restatedev/restate-dist:0.1.4
+docker run --name restate_dev --rm --network=host ghcr.io/restatedev/restate-dist:0.1.5
 ```
 
 ### Connect Services and Runtime
@@ -143,7 +143,7 @@ Please take care to not commit unnecessary build artifacts when extending the te
 (and adjust `.gitignore` accordingly).
 
 ## Releasing
-### Upgrading Typescript SDK 
+### Upgrading Typescript SDK
 - Upgrade the version tag in `template/package.json`.
 - Run the app to check if everything works
 - Test the template build with `npm run build-template`
