@@ -142,12 +142,36 @@ that folder.
 Please take care to not commit unnecessary build artifacts when extending the template
 (and adjust `.gitignore` accordingly).
 
-## Releasing
-### Upgrading Typescript SDK
-- Upgrade the version tag in `template/package.json`.
-- Run the app to check if everything works
-- Test the template build with `npm run build-template`
-- Release the new template generator via `npm run release`
+# Releasing
 
-### Upgrading Restate runtime
+## Releasing via release-it
+
+Releasing a new npm package from this repo requires:
+
+* [SSH access configured for Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) in order to push commits and tags to GitHub
+* A GitHub personal access token with access to https://github.com/restatedev/node-template-generator in your environment as `GITHUB_TOKEN` in order to create a Github release
+
+
+```bash
+npm run release
+# now select what type of release you want to do and say yes to the rest of the options
+```
+
+The actual `npm publish` is run by GitHub actions once a GitHub release is created.
+
+## Releasing manually
+
+1. Bump the version field in package.json to `X.Y.Z`
+2. Create and push a tag of the form `vX.Y.Z` to the upstream repository
+3. [Create a new GitHub release](https://github.com/restatedev/node-template-generator/releases)
+
+Creating the GitHub release will trigger `npm publish` via GitHub actions.
+
+# Upgrading Typescript SDK
+- Upgrade the version tag in `template/package.json`
+- Test the template build with `npm run build-template`
+- Run the app in the `/template` directory to check if everything works via `npm run --prefix template app`
+- Create a new release
+
+# Upgrading Restate runtime
 Upgrade the version tag of the Restate runtime container image in this readme.

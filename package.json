@@ -7,6 +7,9 @@
     "url": "git+https://github.com/restatedev/node-template-generator.git"
   },
   "release-it": {
+    "git": {
+      "pushRepo": "https://github.com/restatedev/node-template-generator.git"
+    },
     "github": {
       "release": true
     },
