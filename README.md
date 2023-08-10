@@ -1,37 +1,44 @@
 # Restate Template for TypeScript / NodeJS services
 
-This project offers a template for a Restate-based service in [TypeScript](https://www.typescriptlang.org/).
-
-Restate is a system for easily building resilient applications using **distributed durable RPC & async/await**.
-
-❓ Learn more about Restate from the [Restate documentation](https://github.com/restatedev/documentation).
+This is a template for a [Restate-based](https://restate.dev/) service in [TypeScript](https://www.typescriptlang.org/).
 
 ## tl;dr
 
-To set up the template service, use this sequence of commands:
+To create a template service, use this sequence of commands:
 
 > &#x1F4DD; Make sure you have set up your [access to Restate's packages](https://github.com/restatedev/restate-dist)
+while the system is still only accessible in private beta.
 
 ```shell
 npx -y @restatedev/create-app
 cd restate-node-template
 
 npm install
-npm run proto
-npm run build
 
-npm run app
+npm run app-dev
 ```
 
-## Step by step
+## gRPC Variant
+
+The sequence of commands above creates a template for Restate's default TypeScript API.
+To create a template for gRPC-based Restate services, use the following sequence instead:
+
+```shell
+npx -y @restatedev/create-app --grpc
+cd restate-node-grpc-template
+
+npm install
+npm run proto
+
+npm run app-dev
+```
+
+## Detailed Step-by-Step Walkthrough
 
 The templated project uses the [Restate TypeScript SDK](https://github.com/restatedev/sdk-typescript)
-and sets up dependencies, protobuf compilation, and other useful scripts.
+and sets up dependencies, and other useful scripts.
 
 This template also contains a minimal runnable example of a Restate service. First, run the example to get an idea of how things tie together. Then, adapt the example and develop your own services.
-
-The basic steps of developing a Restate service are shown below. For a comprehensive guide, please refer to the [Restate Docs](https://github.com/restatedev/documentation)
-and the [TypeScript SDK Readme](https://github.com/restatedev/sdk-typescript/blob/main/README.md).
 
 ### Pre-requisites
 
@@ -42,50 +49,53 @@ and the [TypeScript SDK Readme](https://github.com/restatedev/sdk-typescript/blo
 
 ### Create the template and install dependencies
 
-Use `npx` to run the `@restatedev/create-app` template generator. This gives you the raw project, with the Restate SDK dependency, a simple protobuf setup, and
-a sample application.
+We use the `@restatedev/create-app` template generator program. This gives you the raw project, with the
+Restate SDK dependency, (optionally a simple protobuf setup), and a sample application.
 
+For the default Restate API, use these commands:
 ```shell
 npx -y @restatedev/create-app
 cd restate-node-template
 ```
+For the gRPC-based API, use the following commands instead:
+```shell
+npx -y @restatedev/create-app --grpc
+cd restate-node-grpc-template
+```
 
-Next, install Restate's nodejs dependencies:
+Next, install the dependencies:
 ```shell
 npm install
 ```
 
-### Implement the Service
+### Optionally, edit and compile the gRPC spec
 
-Restate service interfaces are defined using [gRPC](https://grpc.io/). The interface definitions are in the `proto` directory, including the sample service definition in `proto/example.proto`.
+Restate services are RPC handlers, and can optionally be defined in [gRPC](https://grpc.io/).
+If you used the `--grpc` flag when generating the template, you have a `proto` folder with a sample gRPC service definition (`example.proto` is the main file, the others are for the proto compiler tool).
 
-Adjust the interface definition (or not, if you only want to run the sample service). To generate the TypeScript interfaces for the services, run:
+To generate the TypeScript interfaces for the services, run:
 ```
 npm run proto
 ```
 
-The actual service logic goes into the implementation of the generated interfaces.
-We already included a small example in `src/app.ts` to get you started.
+### Implement, build, and run 
 
-### Run the service
+The example in `src/app.ts` shows the basic outline of a Restate-based service/app.
+
+The service logic lives in rpc handlers. In Restate's default API, those are just functions that are registered
+with names and routes when setting up the service's http2 server. For the gRPC-based API, services implement the
+interfaces generated from the gRPC .proto file.
+
 Once you are done with the implementation, build/run the app with:
 ```
 npm run build
 npm run app
 ```
-Your Restate service is now up and running!
+Your Restate service is now up and running! You can also run in incremental-recompile-on-edit mode via
+`npm run app-dev`. 
 
-### Run the service on AWS Lambda
-To run the service as an AWS Lambda function, we need to upload it as a zip file on AWS.
-Create the zip file with:
-```shell
-npm run bundle
-```
-Make sure you create a Restate Lambda handler called `handler` in `src/app.ts`, instead of a Restate server.
 
-Read the [Restate documentation](https://github.com/restatedev/documentation) for the details on AWS Lambda deployment.
-
-## Launch the Restate Runtime and call the Service
+## Run a full setup locally
 
 ### Launch the Restate runtime
 
@@ -126,25 +136,34 @@ When you are extending or adapting the service interface, adapt the method and r
 
 That's it! We managed to run a Restate service and invoke it!
 
+
 # Useful links
 - Restate Typescript SDK: https://github.com/restatedev/sdk-typescript
+- The Restate documentation: https://docs.restate.dev/
 - Restate Docker container: https://github.com/restatedev/restate-dist
-- The Restate documentation: https://github.com/restatedev/documentation
-- Node dev mode: https://github.com/restatedev/node-dev-mode
 
 
 # Contributing to this template
 
 The template that is generated by the `npx @restatedev/create-app` command consists of exactly the
-files that are in the `template` folder. To adjust or extend the template, simply edit or add files in
-that folder.
+files that are in the `template` folder, or in the `template_grpc` folder. To adjust or extend the
+template, simply edit or add files in that folder.
 
 Please take care to not commit unnecessary build artifacts when extending the template
 (and adjust `.gitignore` accordingly).
 
-# Releasing
+### Upgrading Typescript SDK
+- Upgrade the version tag in `template/package.json`
+- Test the template builds with `npm run build-templates`
+- Run the apps in the `/template` and `/template_grpc`directories to check if everything works: `npm run --prefix template app` `npm run --prefix template_grpc app`
+- Create a new release
 
-## Releasing via release-it
+### Upgrading Restate runtime
+Upgrade the version tag of the Restate runtime container image in this readme.
+
+## Releasing
+
+### Releasing via release-it
 
 Releasing a new npm package from this repo requires:
 
@@ -159,7 +178,7 @@ npm run release
 
 The actual `npm publish` is run by GitHub actions once a GitHub release is created.
 
-## Releasing manually
+### Releasing manually
 
 1. Bump the version field in package.json to `X.Y.Z`
 2. Create and push a tag of the form `vX.Y.Z` to the upstream repository
@@ -167,11 +186,3 @@ The actual `npm publish` is run by GitHub actions once a GitHub release is creat
 
 Creating the GitHub release will trigger `npm publish` via GitHub actions.
 
-# Upgrading Typescript SDK
-- Upgrade the version tag in `template/package.json`
-- Test the template build with `npm run build-template`
-- Run the app in the `/template` directory to check if everything works via `npm run --prefix template app`
-- Create a new release
-
-# Upgrading Restate runtime
-Upgrade the version tag of the Restate runtime container image in this readme.

@@ -11,6 +11,7 @@ RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm install
 
 COPY --chown=node:node . .
 
+RUN npm run proto
 RUN npm run build
 
 RUN npm prune --production

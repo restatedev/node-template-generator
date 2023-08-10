@@ -34,8 +34,12 @@
     "lint": "eslint --ignore-path .eslintignore --ext=.js .",
     "format": "prettier --ignore-path .eslintignore --write \"**/*.+(js|ts|json)\"",
     "build": "node ./scripts/build_archive.js",
-    "build-template": "cd template && npm install && npm run proto && npm run build",
-    "clean-template": "rm -rf template/dist template/src/generated template/node_modules template/proto/buf.lock template/package-lock.json",
+    "build-template": "cd template && npm install && npm run build",
+    "clean-template": "rm -rf template/dist template/node_modules template/package-lock.json",
+    "build-grpc-template": "cd template_grpc && npm install && npm run proto && npm run build",
+    "clean-grpc-template": "rm -rf template_grpc/dist template_grpc/src/generated template_grpc/node_modules template_grpc/proto/buf.lock template_grpc/package-lock.json",
+    "build-templates": "npm run build-template && npm run build-grpc-template",
+    "clean-templates": "npm run clean-template && npm run clean-grpc-template",
     "release": "release-it"
   },
   "files": [

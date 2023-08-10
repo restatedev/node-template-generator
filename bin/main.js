@@ -1,12 +1,12 @@
 #!/usr/bin/env node
+
 const fs = require("fs");
 const path = require("path");
 const unzipper = require("unzipper");
 
-console.log("Creating Restate project template for TypeScript...");
-
-async function unzipTemplate() {
-  const templatePath = path.join(__dirname, "..", "data", "node-template.zip");
+async function unzipTemplate(grpc) {
+  const archiveName = grpc ? "node-grpc-template.zip" : "node-template.zip";
+  const templatePath = path.join(__dirname, "..", "data", archiveName);
   const outputPath = process.cwd();
 
   await fs
@@ -15,7 +15,23 @@ async function unzipTemplate() {
     .promise();
 }
 
-unzipTemplate()
+let grpcVariant = false;
+process.argv.slice(2).forEach((arg) => {
+  if (arg === "--grpc") {
+    grpcVariant = true;
+  } else {
+    console.error("Unrecognized argument: " + arg);
+    process.exit(1);
+  }
+});
+
+console.log(
+  `Creating Restate project template for TypeScript ${
+    grpcVariant ? "(gRPC version)" : ""
+  }...`
+);
+
+unzipTemplate(grpcVariant)
   .then(() => {
     console.log("...Done");
   })

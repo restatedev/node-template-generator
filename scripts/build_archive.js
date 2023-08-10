@@ -16,11 +16,11 @@ async function createDirIfNotExists(path) {
   }
 }
 
-async function buildArchive() {
+async function buildArchive(templateDir, filename, archiveFolder) {
   const outDirPath = path.join(__dirname, "..", "data");
   await createDirIfNotExists(outDirPath);
 
-  const outFilePath = path.join(outDirPath, "node-template.zip");
+  const outFilePath = path.join(outDirPath, filename + ".zip");
   const output = fs.createWriteStream(outFilePath);
 
   const archive = archiver("zip", { zlib: { level: 9 } });
@@ -36,14 +36,23 @@ async function buildArchive() {
   });
 
   archive.pipe(output);
-  archive.directory("template/", "restate-node-template");
+  archive.directory(templateDir + "/", archiveFolder);
 
   await archive.finalize();
   console.log(`Zip archive is ${archive.pointer()} bytes in size.`);
 }
 
+async function buildBothArchives() {
+  await buildArchive("template", "node-template", "restate-node-template");
+  await buildArchive(
+    "template_grpc",
+    "node-grpc-template",
+    "restate-node-grpc-template"
+  );
+}
+
 console.log("Creating archive with template...");
-buildArchive()
+buildBothArchives()
   .then(() => {
     console.log("Done.");
   })
