@@ -20,7 +20,7 @@ jobs:
       # we build the archive before running the template test build, to avoid packaging build artifacts
       - run: npm run build
       # when verifying the template, we need access to the private Restate TypeScript/Node SDK package
-      - run: npm run build-template
+      - run: npm run build-templates
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGE_READ_ACCESS }}
       - run: npm publish
