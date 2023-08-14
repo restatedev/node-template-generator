@@ -125,7 +125,13 @@ curl -X POST http://localhost:8081/endpoints -H 'content-type: application/json'
 
 ### Call the Service
 
-We can now invoke the `SampleCall` method by executing:
+We can now invoke the sample method by executing:
+
+```shell
+curl -X POST http://localhost:9090/myservice/hello -H 'content-type: application/json' -d '{"request": "Pete"}'
+```
+
+For the gRPC-based template, use the following command instead:
 
 ```shell
 curl -X POST http://localhost:9090/org.example.ExampleService/SampleCall -H 'content-type: application/json' -d '{"request": "Pete"}'
