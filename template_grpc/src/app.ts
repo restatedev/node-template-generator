@@ -36,7 +36,7 @@ restate
     instance: new MyExampleService(), // the instance of the implementation
     descriptor: protoMetadata, // the metadata (types, interfaces, ...) captured by the gRPC/protobuf compiler
   })
-  .listen(8080);
+  .listen(9080);
 
 // --------------
 //  Testing this
@@ -44,14 +44,14 @@ restate
 //
 // Invoke this by calling Restate to invoke this handler durably:
 //
-//    curl -X POST -H 'content-type: application/json' http://localhost:9090/org.example.ExampleService/SampleCall -d '{ "request": "Friend" }'
+//    curl -X POST -H 'content-type: application/json' http://localhost:8080/org.example.ExampleService/SampleCall -d '{ "request": "Friend" }'
 //
 // To launch Restate and register this service (if you don't have Restate running already)
 //
 //  - On macOS:
-//    docker run --name restate_dev --rm -p 8081:8081 -p 9091:9091 -p 9090:9090 ghcr.io/restatedev/restate-dist:latest
-//    curl -X POST http://localhost:8081/endpoints -H 'content-type: application/json' -d '{"uri": "http://host.docker.internal:8080"}'
+//    docker run --name restate_dev --rm -p 8080:8080 -p 9070:9070 -p 9071:9071 ghcr.io/restatedev/restate-dist:latest
+//    curl -X POST http://localhost:9070/endpoints -H 'content-type: application/json' -d '{"uri": "http://host.docker.internal:9080"}'
 //
 //  - On Linux:
 //    docker run --name restate_dev --rm --network=host ghcr.io/restatedev/restate-dist:latest
-//    curl -X POST http://localhost:8081/endpoints -H 'content-type: application/json' -d '{"uri": "http://localhost:8080"}'
+//    curl -X POST http://localhost:9070/endpoints -H 'content-type: application/json' -d '{"uri": "http://localhost:9080"}'
