@@ -170,7 +170,7 @@ Please take care to not commit unnecessary build artifacts when extending the te
 
 ### Upgrading Typescript SDK
 
-- Upgrade the version tag in `template/package.json`
+- Upgrade the version tag in `template/package.json` and `template_grpc/package.json`
 - Test the template builds with `npm run build-templates`
 - Run the apps in the `/template` and `/template_grpc`directories to check if everything works: `npm run --prefix template app` `npm run --prefix template_grpc app`
 - Create a new release
