@@ -1,6 +1,6 @@
 {
   "name": "@restatedev/create-app",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Project template generator for the Restate TypeScript SDK",
   "repository": {
     "type": "git",
