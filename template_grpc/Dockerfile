@@ -17,6 +17,6 @@ RUN npm run build
 RUN npm prune --production
 ENV NODE_ENV production
 
-EXPOSE 8080
+EXPOSE 9080
 USER node
 CMD ["dumb-init", "node", "./dist/app.js"]
