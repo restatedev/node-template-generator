@@ -18,7 +18,7 @@
     }
   },
   "publishConfig": {
-    "@restatedev:registry": "https://npm.pkg.github.com"
+    "@restatedev:registry": "https://registry.npmjs.org"
   },
   "author": "Restate Developers",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "node": ">= 10"
   },
   "bin": {
-    "@restatedev/create-app": "./bin/main.js"
+    "create-app": "bin/main.js"
   },
   "scripts": {
     "lint": "eslint --ignore-path .eslintignore --ext=.js .",
@@ -54,5 +54,10 @@
     "eslint": "^8.39.0",
     "prettier": "^2.8.8",
     "release-it": "^16.1.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/restatedev/node-template-generator/issues"
+  },
+  "homepage": "https://github.com/restatedev/node-template-generator#readme",
+  "main": "index.js"
 }
