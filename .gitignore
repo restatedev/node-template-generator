@@ -7,13 +7,11 @@ data/node-grpc-template.zip
 template/node_modules
 template/dist
 template/package-lock.json
-template/.npmrc
 template_grpc/node_modules
 template_grpc/dist
 template_grpc/src/generated
 template_grpc/package-lock.json
 template_grpc/proto/buf.lock
-template_grpc/.npmrc
 
 # IDE files
 .idea
