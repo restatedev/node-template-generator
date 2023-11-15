@@ -6,8 +6,6 @@ This is a template for a [Restate-based](https://restate.dev/) service in [TypeS
 
 To create a template service, use this sequence of commands:
 
-> &#x1F4DD; Make sure you have set up your [access to Restate's packages](https://github.com/restatedev/restate-dist) while the system is still only accessible in private beta.
-
 ```shell
 npx -y @restatedev/create-app
 cd restate-node-template
