@@ -42,7 +42,7 @@ This template also contains a minimal runnable example of a Restate service. Fir
 - [NodeJS (and npm)](https://nodejs.org) installed.
 - [Docker Engine](https://docs.docker.com/engine/install/) to launch the Restate runtime (not needed for the app implementation itself).
 
-> &#x1F4DD; As long as Restate hasn't been launched publicly, you need to have access to the private Restate npm packages and Docker container. Please follow the instructions in the `restate-dist` Readme to set up access: https://github.com/restatedev/restate-dist
+> &#x1F4DD; As long as Restate is in private beta, you need to have access to the private Restate Runtime Docker container images. Please follow the instructions in the `restate-dist` Readme to set up access: https://github.com/restatedev/restate-dist
 
 ### Create the template and install dependencies
 
