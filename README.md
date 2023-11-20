@@ -173,10 +173,6 @@ Please take care to not commit unnecessary build artifacts when extending the te
 - Run the apps in the `/template` and `/template_grpc`directories to check if everything works: `npm run --prefix template app` `npm run --prefix template_grpc app`
 - Create a new release
 
-### Upgrading Restate runtime
-
-Upgrade the version tag of the Restate runtime container image in this readme.
-
 ## Releasing
 
 ### Releasing via release-it
