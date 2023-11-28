@@ -100,18 +100,18 @@ Your Restate service is now up and running! You can also run in incremental-reco
 
 ### Launch the Restate runtime
 
-Have a look at how to start up the runtime in a Docker container in this repository: https://github.com/restatedev/restate-dist or simply run the following commands:
+Have a look at how to start up the runtime in [this repository](https://github.com/restatedev/restate) or run the following commands:
 
 - For MacOS:
 
 ```shell
-docker run --name restate_dev --rm -p 8080:8080 -p 9070:9070 -p 9071:9071 ghcr.io/restatedev/restate-dist:latest
+docker run --name restate_dev --rm -p 8080:8080 -p 9070:9070 -p 9071:9071 docker.io/restatedev/restate:latest
 ```
 
 - For Linux:
 
 ```shell
-docker run --name restate_dev --rm --network=host ghcr.io/restatedev/restate-dist:latest
+docker run --name restate_dev --rm --network=host docker.io/restatedev/restate:latest
 ```
 
 ### Connect Services and Runtime
@@ -153,7 +153,7 @@ That's it! We managed to run a Restate service and invoke it!
 
 - Restate Typescript SDK: https://github.com/restatedev/sdk-typescript
 - The Restate documentation: https://docs.restate.dev/
-- Restate Docker container: https://github.com/restatedev/restate-dist
+- Restate Docker container: https://hub.docker.com/r/restatedev/restate
 
 # Contributing to this template
 
