@@ -12,7 +12,7 @@ This is a template for a [Restate-based](https://restate.dev/) service in [TypeS
 To create a template service, use this sequence of commands:
 
 ```shell
-npx -y @restatedev/create-app
+npx -y @restatedev/create-app@latest
 cd restate-node-template
 
 npm install
@@ -26,7 +26,7 @@ The sequence of commands above creates a template for Restate's default TypeScri
 To create a template for gRPC-based Restate services, use the following sequence instead:
 
 ```shell
-npx -y @restatedev/create-app --grpc
+npx -y @restatedev/create-app@latest --grpc
 cd restate-node-grpc-template
 
 npm install
