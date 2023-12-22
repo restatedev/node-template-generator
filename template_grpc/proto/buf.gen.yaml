@@ -8,3 +8,10 @@ plugins:
   - plugin: buf.build/community/stephenh-ts-proto:v1.145.0
     out: ../src/generated/proto
     opt: outputSchema=true,env=node,esModuleInterop=true,lowerCaseServiceMethods=true,paths=source_relative,useExactTypes=false
+  # For testing code
+  - plugin: es
+    opt: target=ts
+    out: ../test/generated
+  - plugin: connect-es
+    opt: target=ts
+    out: ../test/generated

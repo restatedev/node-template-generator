@@ -29,14 +29,15 @@ export class MyExampleService implements ExampleService {
 }
 
 // Create the Restate server to accept requests to the service(s)
-restate
-  .createServer()
-  .bindService({
-    service: "ExampleService", // public name of the service, must match the name in the .proto definition
-    instance: new MyExampleService(), // the instance of the implementation
-    descriptor: protoMetadata, // the metadata (types, interfaces, ...) captured by the gRPC/protobuf compiler
-  })
-  .listen(9080);
+// TODO this should be in a separate file, otherwise it's loaded together when loading this module!
+// restate
+//   .createServer()
+//   .bindService({
+//     service: "ExampleService", // public name of the service, must match the name in the .proto definition
+//     instance: new MyExampleService(), // the instance of the implementation
+//     descriptor: protoMetadata, // the metadata (types, interfaces, ...) captured by the gRPC/protobuf compiler
+//   })
+//   .listen(9080);
 
 // --------------
 //  Testing this
