@@ -5,8 +5,28 @@ import {MyExampleService} from "../src/app";
 import {createPromiseClient, Transport} from "@connectrpc/connect";
 import {createConnectTransport} from "@connectrpc/connect-node";
 import {ExampleService} from "./generated/example_connect";
+import * as http2 from "http2";
+import * as net from "net";
 
-async function prepareRestateTestEnvironment(mountServicesFn: (server: restate.RestateServer) => void): Promise<StartedTestContainer> {
+async function prepareRestateServer(mountServicesFn: (server: restate.RestateServer) => void): Promise<http2.Http2Server> {
+    // Prepare RestateServer
+    const restateServer = restate.createServer()
+    mountServicesFn(restateServer);
+
+    // Start HTTP2 server on random port
+    const restateHttpServer = http2.createServer(restateServer);
+    await new Promise((resolve, reject) => {
+        restateHttpServer.listen(0)
+            .once('listening', resolve)
+            .once('error', reject);
+    });
+    const restateServerPort = (restateHttpServer.address() as net.AddressInfo).port;
+    console.info(`Started listening on port ${restateServerPort}`);
+
+    return restateHttpServer;
+}
+
+async function prepareRestateTestContainer(restateServerPort: number): Promise<StartedTestContainer> {
     const restateContainer = new GenericContainer("docker.io/restatedev/restate:latest")
         // Expose ports
         .withExposedPorts(8080, 9070)
@@ -20,21 +40,14 @@ async function prepareRestateTestEnvironment(mountServicesFn: (server: restate.R
 
     // This MUST be executed before starting the restate container
     // Expose host port to access the restate server
-    await TestContainers.exposeHostPorts(9080);
+    await TestContainers.exposeHostPorts(restateServerPort);
 
     // Start restate container
     const startedRestateContainer = await restateContainer.start();
 
     // From now on, if something fails, stop the container to cleanup the environment
     try {
-        const restateServer = restate.createServer()
-        mountServicesFn(restateServer);
-
-        // TODO bad, fix this once https://github.com/restatedev/sdk-typescript/issues/220 is done
-        // Also we have no way to stop this server :(
-        restateServer.listen(9080);
-
-        console.info("Going to register");
+        console.info("Going to register services");
 
         // Register this service endpoint
         const res = await fetch(`http://${startedRestateContainer.getHost()}:${startedRestateContainer.getMappedPort(9070)}/endpoints`, {
@@ -44,7 +57,7 @@ async function prepareRestateTestEnvironment(mountServicesFn: (server: restate.R
             },
             body: JSON.stringify({
                 // See https://node.testcontainers.org/features/networking/#expose-host-ports-to-container
-                uri: "http://host.testcontainers.internal:9080"
+                uri: `http://host.testcontainers.internal:${restateServerPort}`
             }),
         });
         if (!res.ok) {
@@ -61,11 +74,12 @@ async function prepareRestateTestEnvironment(mountServicesFn: (server: restate.R
 }
 
 describe("ExampleService", () => {
+    let startedRestateHttpServer: http2.Http2Server;
     let startedRestateContainer: StartedTestContainer;
     let clientTransport: Transport;
 
     beforeAll(async () => {
-        startedRestateContainer = await prepareRestateTestEnvironment(
+        startedRestateHttpServer = await prepareRestateServer(
             (restateServer) => restateServer.bindService(
                 {
                     service: "ExampleService",
@@ -73,6 +87,10 @@ describe("ExampleService", () => {
                     descriptor: protoMetadata,
                 }
             )
+        );
+
+        startedRestateContainer = await prepareRestateTestContainer(
+            (startedRestateHttpServer.address() as net.AddressInfo).port
         );
 
         clientTransport = createConnectTransport({
@@ -84,6 +102,7 @@ describe("ExampleService", () => {
 
     afterAll(async () => {
         await startedRestateContainer.stop()
+        startedRestateHttpServer.close();
     });
 
     it("works", async () => {
