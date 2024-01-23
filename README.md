@@ -126,13 +126,13 @@ Once the runtime is up, let it discover your services by executing:
 - For macOS:
 
 ```shell
-curl -X POST http://localhost:9070/endpoints -H 'content-type: application/json' -d '{"uri": "http://host.docker.internal:9080"}'
+curl -X POST http://localhost:9070/deployments -H 'content-type: application/json' -d '{"uri": "http://host.docker.internal:9080"}'
 ```
 
 - For Linux:
 
 ```shell
-curl -X POST http://localhost:9070/endpoints -H 'content-type: application/json' -d '{"uri": "http://localhost:9080"}'
+curl -X POST http://localhost:9070/deployments -H 'content-type: application/json' -d '{"uri": "http://localhost:9080"}'
 ```
 
 ### Call the Service
