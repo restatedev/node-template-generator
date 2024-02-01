@@ -42,16 +42,12 @@ restate
 //  Testing this
 // --------------
 //
+// Have a look at the quickstart guide at https://docs.restate.dev/quickstart/
+//
+// To launch Restate and register this service (if you don't have Restate running already)
+//    docker run --name restate_dev --rm -p 8080:8080 -p 9070:9070 -p 9071:9071 --add-host=host.docker.internal:host-gateway docker.io/restatedev/restate:latest
+//    curl localhost:9070/deployments  -H 'content-type: application/json' -d '{"uri": "http://host.docker.internal:9080"}'
+//
 // Invoke this by calling Restate to invoke this handler durably:
 //
 //    curl -X POST -H 'content-type: application/json' http://localhost:8080/org.example.ExampleService/SampleCall -d '{ "request": "Friend" }'
-//
-// To launch Restate and register this service (if you don't have Restate running already)
-//
-//  - On macOS:
-//    docker run --name restate_dev --rm -p 8080:8080 -p 9070:9070 -p 9071:9071 docker.io/restatedev/restate:latest
-//    curl -X POST http://localhost:9070/deployments -H 'content-type: application/json' -d '{"uri": "http://host.docker.internal:9080"}'
-//
-//  - On Linux:
-//    docker run --name restate_dev --rm --network=host docker.io/restatedev/restate:latest
-//    curl -X POST http://localhost:9070/deployments -H 'content-type: application/json' -d '{"uri": "http://localhost:9080"}'
