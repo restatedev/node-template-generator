@@ -98,42 +98,42 @@ npm run build
 npm run app
 ```
 
-Your Restate service is now up and running! You can also run in incremental-recompile-on-edit mode via
+Your Restate service deployment is now up and running! You can also run in incremental-recompile-on-edit mode via
 `npm run app-dev`.
 
 ## Run a full setup locally
 
-### Launch the Restate runtime
+### Launch the Restate Server
 
-Have a look at how to start up the runtime in [this repository](https://github.com/restatedev/restate) or run the following commands:
+Have a look at the options for downloading Restate [here](https://restate.dev/get-restate/) or run one of the following commands:
 
-- For MacOS:
+- To run Restate in a Docker container:
+    ```shell
+    docker run --name restate_dev --rm -p 8080:8080 -p 9070:9070 -p 9071:9071 --add-host=host.docker.internal:host-gateway docker.io/restatedev/restate:latest
+    ```
+- To run Restate with `npx`:
+    ```shell
+    npx @restatedev/restate-server@latest
+    ```
+- To run Restate with Homebrew:
+    ```
+    brew install restatedev/tap/restate-server
+    ```
 
-```shell
-docker run --name restate_dev --rm -p 8080:8080 -p 9070:9070 -p 9071:9071 docker.io/restatedev/restate:latest
-```
+### Register the service deployment in Restate
 
-- For Linux:
+Once Restate is up, register the service deployment in Restate by executing:
 
-```shell
-docker run --name restate_dev --rm --network=host docker.io/restatedev/restate:latest
-```
-
-### Connect Services and Runtime
-
-Once the runtime is up, let it discover your services by executing:
-
-- For macOS:
-
-```shell
-curl -X POST http://localhost:9070/deployments -H 'content-type: application/json' -d '{"uri": "http://host.docker.internal:9080"}'
-```
-
-- For Linux:
-
-```shell
-curl -X POST http://localhost:9070/deployments -H 'content-type: application/json' -d '{"uri": "http://localhost:9080"}'
-```
+- Via the [CLI](https://docs.restate.dev/restate/cli):
+    ```shell
+    restate dp register localhost:9080
+    ```
+  When running Restate with Docker, use `host.docker.internal` instead of `localhost` for the service deployment URI.
+- Via `curl`:
+    ```shell
+    curl localhost:9070/deployments  -H 'content-type: application/json' -d '{"uri": "http://localhost:9080"}'
+    ```
+  When running Restate with Docker, use `host.docker.internal` instead of `localhost` for the service deployment URI.
 
 ### Call the Service
 
