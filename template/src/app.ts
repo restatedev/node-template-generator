@@ -14,7 +14,7 @@ import * as restate from "@restatedev/restate-sdk";
 //
 // The routes and handlers in the service
 const router = restate.router({
-  hello: async (ctx: restate.RpcContext, name: string) => {
+  hello: async (ctx: restate.Context, name: string) => {
     return `Hello ${name}!`;
   }
 });
@@ -25,7 +25,7 @@ export const service: restate.ServiceApi<typeof router> = { path: "myservice" }
 
 // Create the Restate server to accept requests
 restate
-  .createServer()
+  .endpoint()
   .bindRouter(service.path, router)
   .listen(9080);
 
