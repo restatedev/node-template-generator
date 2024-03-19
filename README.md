@@ -178,6 +178,8 @@ Please take care to not commit unnecessary build artifacts when extending the te
 
 ## Releasing
 
+- Bump the version field in [template/package.json](template/package.json) and [template_grpc/package.json](template_grpc/package.json) to `X.Y.Z`
+
 ### Releasing via release-it
 
 Releasing a new npm package from this repo requires:
@@ -194,8 +196,7 @@ The actual `npm publish` is run by GitHub actions once a GitHub release is creat
 
 ### Releasing manually
 
-1. Bump the version field in package.json to `X.Y.Z`
-2. Create and push a tag of the form `vX.Y.Z` to the upstream repository
-3. [Create a new GitHub release](https://github.com/restatedev/node-template-generator/releases)
+1. Create and push a tag of the form `vX.Y.Z` to the upstream repository
+1. [Create a new GitHub release](https://github.com/restatedev/node-template-generator/releases)
 
 Creating the GitHub release will trigger `npm publish` via GitHub actions.
