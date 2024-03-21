@@ -124,7 +124,7 @@ Have a look at the options for downloading Restate [here](https://restate.dev/ge
 
 Once Restate is up, register the service deployment in Restate by executing:
 
-- Via the [CLI](https://docs.restate.dev/restate/cli):
+- Via the [CLI](https://docs.restate.dev/operate/cli):
     ```shell
     restate dp register localhost:9080
     ```
