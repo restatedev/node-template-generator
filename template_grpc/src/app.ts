@@ -42,7 +42,7 @@ restate
 //  Testing this
 // --------------
 //
-// Have a look at the quickstart guide at https://docs.restate.dev/quickstart/
+// Have a look at the quickstart guide at https://docs.restate.dev/get_started/quickstart/
 //
 // To launch Restate and register this service (if you don't have Restate running already)
 //    docker run --name restate_dev --rm -p 8080:8080 -p 9070:9070 -p 9071:9071 --add-host=host.docker.internal:host-gateway docker.io/restatedev/restate:latest
