@@ -20,21 +20,6 @@ npm install
 npm run app-dev
 ```
 
-## gRPC Variant
-
-The sequence of commands above creates a template for Restate's default TypeScript API.
-To create a template for gRPC-based Restate services, use the following sequence instead:
-
-```shell
-npx -y @restatedev/create-app@latest --grpc
-cd restate-node-grpc-template
-
-npm install
-npm run proto
-
-npm run app-dev
-```
-
 ## Detailed Step-by-Step Walkthrough
 
 The templated project uses the [Restate TypeScript SDK](https://github.com/restatedev/sdk-typescript)
@@ -50,7 +35,7 @@ This template also contains a minimal runnable example of a Restate service. Fir
 ### Create the template and install dependencies
 
 We use the `@restatedev/create-app` template generator program. This gives you the raw project, with the
-Restate SDK dependency, (optionally a simple protobuf setup), and a sample application.
+Restate SDK dependency and a sample application.
 
 For the default Restate API, use these commands:
 
@@ -59,28 +44,10 @@ npx -y @restatedev/create-app
 cd restate-node-template
 ```
 
-For the gRPC-based API, use the following commands instead:
-
-```shell
-npx -y @restatedev/create-app --grpc
-cd restate-node-grpc-template
-```
-
 Next, install the dependencies:
 
 ```shell
 npm install
-```
-
-### Optionally, edit and compile the gRPC spec
-
-Restate services are RPC handlers, and can optionally be defined in [gRPC](https://grpc.io/).
-If you used the `--grpc` flag when generating the template, you have a `proto` folder with a sample gRPC service definition (`example.proto` is the main file, the others are for the proto compiler tool).
-
-To generate the TypeScript interfaces for the services, run:
-
-```
-npm run proto
 ```
 
 ### Implement, build, and run
@@ -140,13 +107,7 @@ Once Restate is up, register the service deployment in Restate by executing:
 We can now invoke the sample method by executing:
 
 ```shell
-curl -X POST http://localhost:8080/myservice/hello -H 'content-type: application/json' -d '{"request": "Pete"}'
-```
-
-For the gRPC-based template, use the following command instead:
-
-```shell
-curl -X POST http://localhost:8080/org.example.ExampleService/SampleCall -H 'content-type: application/json' -d '{"request": "Pete"}'
+curl localhost:8080/myservice/hello -H 'content-type: application/json' -d '"Pete"'
 ```
 
 You can see that we include the JSON encoded request body.

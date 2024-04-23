@@ -13,14 +13,10 @@ jobs:
       # Setup .npmrc file to publish to NPM
       - uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
       - run: npm run lint
-      # we build the archive before running the template test build, to avoid packaging build artifacts
-      - run: npm run build
-      # when verifying the template, we need access to the private Restate TypeScript/Node SDK package
-      - run: npm run build-templates
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,41 +1,36 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
 const unzipper = require("unzipper");
 
-async function unzipTemplate(grpc) {
-  const archiveName = grpc ? "node-grpc-template.zip" : "node-template.zip";
-  const templatePath = path.join(__dirname, "..", "data", archiveName);
-  const outputPath = process.cwd();
+async function main() {
+  console.log(`Creating Restate project template for TypeScript...`);
 
-  await fs
-    .createReadStream(templatePath)
-    .pipe(unzipper.Extract({ path: outputPath }))
-    .promise();
+  const TEMPLATE_LOCATION =
+    "https://github.com/restatedev/examples/releases/latest/download/typescript-hello-world.zip";
+
+  const response = await fetch(TEMPLATE_LOCATION);
+  if (response.status < 200 || response.status >= 300) {
+    throw new Error(response.statusText);
+  }
+
+  // https://github.com/ZJONSSON/node-unzipper/issues/292
+  const responseBodyBuffer = Buffer.from(
+    new Uint8Array(await response.arrayBuffer())
+  );
+
+  const outputPath = process.cwd();
+  const zip = await unzipper.Open.buffer(responseBodyBuffer);
+  await zip.extract({ path: outputPath });
+
+  console.log("...Done");
 }
 
-let grpcVariant = false;
-process.argv.slice(2).forEach((arg) => {
-  if (arg === "--grpc") {
-    grpcVariant = true;
-  } else {
-    console.error("Unrecognized argument: " + arg);
-    process.exit(1);
-  }
-});
-
-console.log(
-  `Creating Restate project template for TypeScript ${
-    grpcVariant ? "(gRPC version)" : ""
-  }...`
-);
-
-unzipTemplate(grpcVariant)
+// POSIX compliant apps should report an exit status
+main()
   .then(() => {
-    console.log("...Done");
+    process.exit(0);
   })
   .catch((err) => {
-    console.error("Failed to unzip project template: " + err);
-    console.error(err.stack);
+    console.error(err); // Writes to stderr
+    process.exit(1);
   });

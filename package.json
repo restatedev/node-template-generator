@@ -25,21 +25,14 @@
   "email": "code@restate.dev",
   "type": "commonjs",
   "engines": {
-    "node": ">= 10"
+    "node": ">= 18"
   },
   "bin": {
     "create-app": "bin/main.js"
   },
   "scripts": {
-    "lint": "eslint --ignore-path .eslintignore --ext=.js .",
-    "format": "prettier --ignore-path .eslintignore --write \"**/*.+(js|ts|json)\"",
-    "build": "node ./scripts/build_archive.js",
-    "build-template": "cd template && npm install && npm run build",
-    "clean-template": "rm -rf template/dist template/node_modules template/package-lock.json",
-    "build-grpc-template": "cd template_grpc && npm install && npm run proto && npm run build",
-    "clean-grpc-template": "rm -rf template_grpc/dist template_grpc/src/generated template_grpc/node_modules template_grpc/proto/buf.lock template_grpc/package-lock.json",
-    "build-templates": "npm run build-template && npm run build-grpc-template",
-    "clean-templates": "npm run clean-template && npm run clean-grpc-template",
+    "lint": "eslint bin/**",
+    "format": "prettier --write \"bin/*.+(js|ts|json)\"",
     "release": "release-it"
   },
   "files": [
@@ -47,11 +40,13 @@
     "data"
   ],
   "dependencies": {
-    "unzipper": "0.10.14"
+    "decompress": "^4.2.1",
+    "unzipper": "0.11.4"
   },
   "devDependencies": {
-    "archiver": "^5.3.1",
-    "eslint": "^8.39.0",
+    "@eslint/js": "^9.1.1",
+    "eslint": "^8.57.0",
+    "globals": "^15.0.0",
     "prettier": "^2.8.8",
     "release-it": "^16.1.4"
   },
