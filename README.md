@@ -107,7 +107,7 @@ Once Restate is up, register the service deployment in Restate by executing:
 We can now invoke the sample method by executing:
 
 ```shell
-curl -X POST http://localhost:8080/myservice/hello -H 'content-type: application/json' -d '"Pete"'
+curl localhost:8080/myservice/hello -H 'content-type: application/json' -d '"Pete"'
 ```
 
 You can see that we include the JSON encoded request body.
