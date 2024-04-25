@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const unzipper = require("unzipper");
+const fs = require("fs/promises");
 
 async function main() {
   console.log(`Creating Restate project template for TypeScript...`);
@@ -18,7 +19,9 @@ async function main() {
     new Uint8Array(await response.arrayBuffer())
   );
 
-  const outputPath = process.cwd();
+  const outputPath = process.cwd() + "/restate-node-template";
+  await fs.mkdir(outputPath, { recursive: true });
+
   const zip = await unzipper.Open.buffer(responseBodyBuffer);
   await zip.extract({ path: outputPath });
 
